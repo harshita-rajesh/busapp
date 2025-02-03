@@ -1,0 +1,43 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     <script
+         src="https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.13.0/src/sdk.min.js"></script>
+      
+ </head>
+ 
+ <body>
+     <div>
+         <button type="button" onclick="startOnboarding();">
+             Start Onboarding
+         </button>
+     </div>
+ </body>
+ <script>
+  
+     function startOnboarding() {
+         const accessToken ="Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6Inl2ZHh5eSIsImhhc2giOiJmMGE0NGIxYmRjYWE3MGZjN2MxZTk3MTA3ZTQxMWZlZWUwODExNjM0N2Q0MmE5MzlmYzhkYzlmNzM5MjdlMDg5IiwiaWF0IjoxNzM4NTc1ODAzLCJleHAiOjE3Mzg2MTkwMDMsImp0aSI6ImViNmI5MGI2LWViYzctNDE2MS04ODUyLTFhOWUwYWIzODQxNyJ9.Kwdi3mbrU0HcPwzWsFzLzU7IArAnQr2YXGsFiK69FPDFkPRMQSTSxmvHGthcXvXY6CEbIegEUxOlTZsT-JSnVQqXY_i6g9ffP5LUZ3-HBn0c3tc5LD7n93iEUpDf8KzICiVi_DfNi9xD0TIuFIfQ6jDmXViT-0Jk9DgvaCaJXyM"
+         const hyperKycConfig = new HyperKycConfig(
+             accessToken,
+             "busworkflow",
+             "HR_hunter_test_1737703172766"
+         );
+         HyperKYCModule.launch(hyperKycConfig, handler);
+     }
+     const handler = (HyperKycResult) => {
+         if (HyperKycResult.Cancelled) {
+           // user cancelled
+             alert(HyperKycResult.Cancelled);
+         } else if (HyperKycResult.Failure) {
+           // failure
+             alert(HyperKycResult.Failure);
+         } else if (HyperKycResult.Success) {
+           // success
+             alert(HyperKycResult.Success);
+         }
+     }
+ </script>
+ 
+ </html>
